@@ -1,0 +1,474 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags %}
+
+{% block meta_title %}{{ page.join.title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.join.description }}
+{% endmetablock %}{% endblock %}
+
+{% block extra_head %}
+{#    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>#}
+    <script type="text/javascript">
+    /*function getParameterByName(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)')
+                        .exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }*/
+
+    $(document).ready(function(){
+
+        function processform()
+        {
+            errmsg = "The following fields are required:\n\n";
+            if($('input[name=first_name]').val()=='' || $('input[name=first_name]').val()=='First Name')
+            {
+                errmsg += "First Name \n"; alert(errmsg); $('input[name=first_name]').focus(); return false;
+            }
+            if($('input[name=last_name]').val()=='' || $('input[name=last_name]').val()=='Last Name')
+            {
+                errmsg+="Last Name \n "; $('input[name=last_name]').focus(); alert(errmsg); return false;
+            }
+            if($('input[name=email]').val()=='' || $('input[name=email]').val()=='Email')
+            {
+                errmsg += "Email \n "; alert(errmsg); $('input[name=email]').focus(); return false;
+            }
+            if($('select[name=00NU00000030Utc]').val()=='Over-18?')
+            {
+                errmsg+="Age \n "; alert(errmsg); $('select[name=00NU00000030Utc]').focus(); return false;
+            }
+            if($('input[name=00NU00000030VRK]').val()=='' || $('input[name=00NU00000030VRK]').val()=='Channel URL(s)')
+            {
+                errmsg += "Channel Urls \n"; alert(errmsg); $('input[name=00NU00000030VRK]').focus(); return false;
+            }
+            if($('select[name=00NU0000002SqvO]').val()=='Views-Per-Month')
+            {
+                errmsg+="Views Per Month \n"; alert(errmsg); $('select[name=00NU0000002SqvO]').focus(); return false;
+            }
+            if($('select[name=00NU0000002Squz]').val()=='YouTube-Partner?')
+            {
+                errmsg+="Partnered? \n"; alert(errmsg); $('select[name=00NU0000002Squz]').focus(); return false;
+            }
+            if($('select[name=00NU00000030VIc]').val()=='Location')
+            {
+                errmsg+="Location \n "; alert(errmsg); $('select[name=00NU00000030VIc]').focus(); return false;
+            }
+            if($('select[name=00NU0000002SqwG]').val()=='Genre')
+            {
+                errmsg+="Genre \n "; alert(errmsg); $('select[name=00NU0000002SqwG]').focus(); return false;
+            }
+            if($('select[name=00NU00000030VM5]').val()=='Copyright?')
+            {
+                errmsg+="Any Copyright Issues? \n "; alert(errmsg); $('select[name=00NU00000030VM5]').focus(); return false;
+            }
+            
+            $('form#join').submit();
+            return true;
+        }
+
+        $(":input").click(function(){
+            $(this).css({'color':'#222222', 'background':'#cccccc'});
+            $(this).select();
+        });
+
+        $(":input").blur(function(){
+            $(this).css({'color':'#ffffff', 'background':'#222222'});
+        });
+
+        $("textarea").click(function(){
+            $(this).css({'color':'#222222', 'background':'#cccccc'});
+            $(this).select();
+        });
+
+        $("textarea").blur(function(){
+            $(this).css({'color':'#ffffff', 'background':'#222222'});
+        });
+
+        /*$(":input").focus(function(){
+            $(this).css({'color':'#222222', 'background':'#cccccc'});
+            $(this).select();
+        });*/
+
+        $('a#submit-join').click(function(e){
+            e.preventDefault();
+            processform();
+        });
+ 
+        $('.thankyou').hide();
+
+        if (getParameterByName("submitted"))
+        {
+            $('.thankyou').show();
+            $('#join-form').hide();
+            $('#join-message').hide();
+        }
+
+        if ($.cookie('campaign_id'))
+        {
+            $('input[name=Campaign_ID]').val($.cookie('campaign_id'));
+        }
+    });
+    </script>
+{% endblock %}
+
+{% block title %}
+{% editable page.join.title %}{{ page.join.title }}{% endeditable %}
+{% endblock %}
+
+{% block main %}
+<div id="grid-middle-join">
+    <div id="join-wrapper">
+        <div id="join-copy">
+{% comment %}
+        <div id="join-copy-header"><img src="{{ MEDIA_URL }}{{ page.join.headerimg }}" alt="Join Maker Studios"/></div>
+{% endcomment %}
+        <div id="join-message">
+            {% editable page.join.marketing_message %}{{ page.join.marketing_message|safe}}{% endeditable %}
+        </div>
+        <div class="thankyou">
+            {% editable page.join.thankyou_message %}{{ page.join.thankyou_message|safe}}{% endeditable %}
+        </div>
+        <div id="join-form">
+            <form action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" id="join">
+
+                <input type=hidden name="oid" value="00DU0000000JLmY">
+                <input type=hidden name="retURL" value="http://rpmtalentnetwork.com/join-our-network/?submitted=true">
+                <input type=hidden name="00NU00000030U4K" value="RPM">
+                <input type="hidden" id="00NU00000030Vaq" name="00NU00000030Vaq" value="rpmtalentnetwork.com"/>
+                <input type="hidden" id="Campaign_ID" name="Campaign_ID" value="Campaign_ID"/>
+
+                <!--  ----------------------------------------------------------------------  -->
+                <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+                <!--  these lines if you wish to test in debug mode.                          -->
+                <!--  <input type="hidden" name="debug" value=1>                              -->
+                <!--  <input type="hidden" name="debugEmail"                                  -->
+                <!--  value="ben.collier@makerstudios.com">                                   -->
+                <!--  ----------------------------------------------------------------------  -->
+                
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" value="First Name"/></td>
+                    <td><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" value="Last Name"/></td>
+                </tr>
+                <tr>
+                    <td><input  id="email" maxlength="80" name="email" size="20" type="text" value="Email"/></td>
+                    <td><select  id="00NU00000030Utc" name="00NU00000030Utc" title="Over 18?">
+                        <option value="Over-18?">Over 18?</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input  id="00NU00000030VRK" maxlength="255" name="00NU00000030VRK" type="text" class="longinput" value="Channel URL(s)"/></td>
+                </tr>
+                <tr>
+                    <td><input id="00NU00000030Uth" maxlength="40" name="00NU00000030Uth" size="20" type="text" value="Skype"/></td>
+                    <td><select id="00NU0000002SqwG" name="00NU0000002SqwG" title="Genre"><option value="Genre">Genre</option><option value="Entertainment">Entertainment</option>
+                        <option value="Gaming">Gaming</option>
+                        <option value="Music">Music</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Moms/Women">Moms/Women</option>
+                        <option value="Animation">Animation</option>
+                        <option value="Other">Other</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><input  id="00NU00000030VNc" maxlength="255" name="00NU00000030VNc" size="20" type="text" value="Twitter URL"/></td>
+                    <td><select  id="00NU0000002Squz" name="00NU0000002Squz" title="YouTube Partner?"><option value="YouTube-Partner?">YouTube Partner?</option><option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Unsure">Unsure</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><input  id="phone" maxlength="40" name="phone" size="20" type="text" value="Phone"/></td>
+                    <td><select  id="00NU0000002SqvO" name="00NU0000002SqvO" title="Views Per Month"><option value="Views-Per-Month">Views Per Month</option><option value="0-100K">0-100K</option>
+                        <option value="100K-500K">100K-500K</option>
+                        <option value="500K-3M">500K-3M</option>
+                        <option value="3M+">3M+</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><input  id="00NU00000030Utm" maxlength="255" name="00NU00000030Utm" size="20" type="text" value="Facebook URL"/></td>
+                    <td><select  id="00NU00000030VIc" name="00NU00000030VIc" title="Country"><option value="Location">Location</option><option value="Afghanistan">Afghanistan</option>
+                        <option value="Albania">Albania</option>
+                        <option value="Algeria">Algeria</option>
+                        <option value="Andorra">Andorra</option>
+                        <option value="Angola">Angola</option>
+                        <option value="Antigua &amp; Deps">Antigua &amp; Deps</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Armenia">Armenia</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Austria">Austria</option>
+                        <option value="Azerbaijan">Azerbaijan</option>
+                        <option value="Bahamas">Bahamas</option>
+                        <option value="Bahrain">Bahrain</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="Barbados">Barbados</option>
+                        <option value="Belarus">Belarus</option>
+                        <option value="Belgium">Belgium</option>
+                        <option value="Belize">Belize</option>
+                        <option value="Benin">Benin</option>
+                        <option value="Bhutan">Bhutan</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="Bosnia Herzegovina">Bosnia Herzegovina</option>
+                        <option value="Botswana">Botswana</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Brunei">Brunei</option>
+                        <option value="Bulgaria">Bulgaria</option>
+                        <option value="Burkina">Burkina</option>
+                        <option value="Burundi">Burundi</option>
+                        <option value="Cambodia">Cambodia</option>
+                        <option value="Cameroon">Cameroon</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Cape Verde">Cape Verde</option>
+                        <option value="Central African Rep">Central African Rep</option>
+                        <option value="Chad">Chad</option>
+                        <option value="Chile">Chile</option>
+                        <option value="China">China</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Comoros">Comoros</option>
+                        <option value="Congo">Congo</option>
+                        <option value="Congo {Democratic Rep}">Congo {Democratic Rep}</option>
+                        <option value="Costa Rica">Costa Rica</option>
+                        <option value="Croatia">Croatia</option>
+                        <option value="Cuba">Cuba</option>
+                        <option value="Cyprus">Cyprus</option>
+                        <option value="Czech Republic">Czech Republic</option>
+                        <option value="Denmark">Denmark</option>
+                        <option value="Djibouti">Djibouti</option>
+                        <option value="Dominica">Dominica</option>
+                        <option value="Dominican Republic">Dominican Republic</option>
+                        <option value="East Timor">East Timor</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="El Salvador">El Salvador</option>
+                        <option value="Equatorial Guinea">Equatorial Guinea</option>
+                        <option value="Eritrea">Eritrea</option>
+                        <option value="Estonia">Estonia</option>
+                        <option value="Ethiopia">Ethiopia</option>
+                        <option value="Fiji">Fiji</option>
+                        <option value="Finland">Finland</option>
+                        <option value="France">France</option>
+                        <option value="Gabon">Gabon</option>
+                        <option value="Gambia">Gambia</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Greece">Greece</option>
+                        <option value="Grenada">Grenada</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Guinea">Guinea</option>
+                        <option value="Guinea-Bissau">Guinea-Bissau</option>
+                        <option value="Guyana">Guyana</option>
+                        <option value="Haiti">Haiti</option>
+                        <option value="Honduras">Honduras</option>
+                        <option value="Hungary">Hungary</option>
+                        <option value="Iceland">Iceland</option>
+                        <option value="India">India</option>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Iran">Iran</option>
+                        <option value="Iraq">Iraq</option>
+                        <option value="Ireland {Republic}">Ireland {Republic}</option>
+                        <option value="Israel">Israel</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Ivory Coast">Ivory Coast</option>
+                        <option value="Jamaica">Jamaica</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Jordan">Jordan</option>
+                        <option value="Kazakhstan">Kazakhstan</option>
+                        <option value="Kenya">Kenya</option>
+                        <option value="Kiribati">Kiribati</option>
+                        <option value="Korea North">Korea North</option>
+                        <option value="Korea South">Korea South</option>
+                        <option value="Kosovo">Kosovo</option>
+                        <option value="Kuwait">Kuwait</option>
+                        <option value="Kyrgyzstan">Kyrgyzstan</option>
+                        <option value="Laos">Laos</option>
+                        <option value="Latvia">Latvia</option>
+                        <option value="Lebanon">Lebanon</option>
+                        <option value="Lesotho">Lesotho</option>
+                        <option value="Liberia">Liberia</option>
+                        <option value="Libya">Libya</option>
+                        <option value="Liechtenstein">Liechtenstein</option>
+                        <option value="Lithuania">Lithuania</option>
+                        <option value="Luxembourg">Luxembourg</option>
+                        <option value="Macedonia">Macedonia</option>
+                        <option value="Madagascar">Madagascar</option>
+                        <option value="Malawi">Malawi</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Maldives">Maldives</option>
+                        <option value="Mali">Mali</option>
+                        <option value="Malta">Malta</option>
+                        <option value="Marshall Islands">Marshall Islands</option>
+                        <option value="Mauritania">Mauritania</option>
+                        <option value="Mauritius">Mauritius</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="Micronesia">Micronesia</option>
+                        <option value="Moldova">Moldova</option>
+                        <option value="Monaco">Monaco</option>
+                        <option value="Mongolia">Mongolia</option>
+                        <option value="Montenegro">Montenegro</option>
+                        <option value="Morocco">Morocco</option>
+                        <option value="Mozambique">Mozambique</option>
+                        <option value="Myanmar, {Burma}">Myanmar, {Burma}</option>
+                        <option value="Namibia">Namibia</option>
+                        <option value="Nauru">Nauru</option>
+                        <option value="Nepal">Nepal</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="Nicaragua">Nicaragua</option>
+                        <option value="Niger">Niger</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Oman">Oman</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="Palau">Palau</option>
+                        <option value="Panama">Panama</option>
+                        <option value="Papua New Guinea">Papua New Guinea</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="Peru">Peru</option>
+                        <option value="Philippines">Philippines</option>
+                        <option value="Poland">Poland</option>
+                        <option value="Portugal">Portugal</option>
+                        <option value="Qatar">Qatar</option>
+                        <option value="Romania">Romania</option>
+                        <option value="Russian Federation">Russian Federation</option>
+                        <option value="Rwanda">Rwanda</option>
+                        <option value="Saint Vincent &amp; the Grenadines">Saint Vincent &amp; the Grenadines</option>
+                        <option value="Samoa">Samoa</option>
+                        <option value="San Marino">San Marino</option>
+                        <option value="Sao Tome &amp; Principe">Sao Tome &amp; Principe</option>
+                        <option value="Saudi Arabia">Saudi Arabia</option>
+                        <option value="Senegal">Senegal</option>
+                        <option value="Serbia">Serbia</option>
+                        <option value="Seychelles">Seychelles</option>
+                        <option value="Sierra Leone">Sierra Leone</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Slovakia">Slovakia</option>
+                        <option value="Slovenia">Slovenia</option>
+                        <option value="Solomon Islands">Solomon Islands</option>
+                        <option value="Somalia">Somalia</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="South Sudan">South Sudan</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Sri Lanka">Sri Lanka</option>
+                        <option value="St Kitts &amp; Nevis">St Kitts &amp; Nevis</option>
+                        <option value="St Lucia">St Lucia</option>
+                        <option value="Sudan">Sudan</option>
+                        <option value="Suriname">Suriname</option>
+                        <option value="Swaziland">Swaziland</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Switzerland">Switzerland</option>
+                        <option value="Syria">Syria</option>
+                        <option value="Taiwan">Taiwan</option>
+                        <option value="Tajikistan">Tajikistan</option>
+                        <option value="Tanzania">Tanzania</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Togo">Togo</option>
+                        <option value="Tonga">Tonga</option>
+                        <option value="Trinidad &amp; Tobago">Trinidad &amp; Tobago</option>
+                        <option value="Tunisia">Tunisia</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="Turkmenistan">Turkmenistan</option>
+                        <option value="Tuvalu">Tuvalu</option>
+                        <option value="Uganda">Uganda</option>
+                        <option value="Ukraine">Ukraine</option>
+                        <option value="United Arab Emirates">United Arab Emirates</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="United States">United States</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Uzbekistan">Uzbekistan</option>
+                        <option value="Vanuatu">Vanuatu</option>
+                        <option value="Vatican City">Vatican City</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Vietnam">Vietnam</option>
+                        <option value="Yemen">Yemen</option>
+                        <option value="Zambia">Zambia</option>
+                        <option value="Zimbabwe">Zimbabwe</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><select id="00NU00000030VM5" name="00NU00000030VM5" title="Copyright?" class="longinput"><option value="Copyright?">Copyright Issues?</option><option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Unsure">Unsure</option>
+                        </select></td>
+                </tr>
+                <tr><td colspan="2">
+                    <textarea  id="00NU00000030Utw" name="00NU00000030Utw" rows="3" type="text" wrap="soft">Why would you like to join RPM?</textarea>
+                </td></tr>
+                <tr>
+                    <td colspan="2" align="right">
+                        <a href="#" id="submit-join"><img src="{{ STATIC_URL }}images/rpmsubmitbutton.png" alt="Submit" class="submitbutton"/></a></td>
+                </tr>
+               </table>
+            </form>
+            {% comment %}<form action="" method="post" id="join">
+                {% csrf_token %}
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>{{ form.name.errors }}{{ form.name }}</td>
+                    <td>{{ form.country.errors }}{{ form.country }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.email.errors }}{{ form.email }}</td>
+                    <td>{{ form.average_views_month.errors }}{{ form.average_views_month }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.number_of_subscribers.errors }}{{ form.number_of_subscribers }}</td>
+                    <td>{{ form.average_views_video.errors }}{{ form.average_views_video }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.language.errors }}{{ form.language }}</td>
+                    <td>{{ form.youtube_partner.errors }}{{ form.youtube_partner }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.city.errors }}{{ form.city }}</td>
+                    <td>{{ form.genre.errors }}{{ form.genre }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">{{ form.channel_url.errors }}{{ form.channel_url }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right">
+                        <a href="#" id="submit-join"><img src="{{ STATIC_URL }}images/rpmsubmitbutton.png" alt="Submit" class="submitbutton"/></a></td>
+                </tr>
+               </table>
+            </form>{% endcomment %}
+        </div>
+        </div>
+
+    </div>
+</div>
+
+{% block extra_body %}
+{% if request.REQUEST.submitted %}
+<!-- Google Code for RPM Signed Up Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1001326589;
+var google_conversion_language = "en";
+var google_conversion_format = "2";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "dGshCNv39AIQ_Y-83QM";
+var google_conversion_value = 0;
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1001326589/?label=dGshCNv39AIQ_Y-83QM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+{% endif %}
+{% endblock %}
+    
+{% endblock %}

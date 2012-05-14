@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags truncate_chars %}
+
+{% block meta_title %}{{ page.title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% endblock %}
+
+{% block main %}
+<div id="grid-middle-news">
+    <div id="experts-blog-wrapper">
+        {% for n in bloglist.object_list %}
+        <div class="experts-blog-item">
+            <div class="experts-blog-date">
+                {{ n.publish_date|date:"M"|upper}}
+                <span class="date-day">{{ n.publish_date|date:"d"}}</span>
+                {{ n.publish_date|date:"Y"}}
+            </div>
+            <div class="experts-blog-image">
+                <a href="/{{ n.slug }}/" target="_self"><img src="{{ MEDIA_URL }}{% thumbnail n.headerimg 200 175 %}" alt="n.title" /></a>
+            </div>
+            <div class="experts-blog-data">
+                <h2>{{ n.title|upper }}</h2>
+                <div class="experts-blog-author">{{ n.author }}</div>
+                {{ n.news_text|truncchar:95|safe }}
+            </div>
+            {% comment %}<div class="news-link">
+                <a href="{{ n.news_url }}" target="{{ n.news_url_target }}"><img src="{{ STATIC_URL }}images/news-read-more.png" alt="Read More" /></a>
+            </div>{% endcomment %}
+        </div>
+        <div class="separator"><hr /></div>
+        {% endfor %}
+        <div class="experts-blog-item-paging">
+        {% pagination_for bloglist %}
+        </div>
+    </div>
+    <div id="experts-blog-featured-posts">
+        <h2>Featured Posts</h2>
+        {% for post in featured_posts %}
+            <a href="/{{ post.slug }}/"><img src="{{ MEDIA_URL }}{% thumbnail post.headerimg 95 88 %}" alt="n.title"/></a>
+            <div class="experts-blog-featured-title">{{ post.title }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

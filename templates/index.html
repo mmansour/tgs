@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% load pages_tags mezzanine_tags i18n %}
+
+{% block meta_title %}{% trans "Home" %}{% endblock %}
+{% block meta_description %}
+    Maker Studios is a collaborative community empowering content creators in their work and allowing them to support themselves doing what they love.
+{% endblock %}
+{#{% block title %}#}
+{#{% trans "Home" %}#}
+{#{% endblock %}#}
+
+{% block extra_head %}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+//    loadPlayer();
+    $('.tweets > li').click(function(event){
+        $(this).find('a').attr('target','_blank');
+    });
+});
+</script>
+{% endblock %}
+
+{% block main %}
+<div id="grid-middle">
+    <div id="topwrapper">
+        <div id="welcome">
+            <img src="{{ STATIC_URL }}images/bg-welcome-header.jpg" alt="For artists by artists - Maker Studios"/>
+
+            <div id="welcome-message">{{ homepage.welcome_message|safe }}</div>
+        </div>
+        <div id="myContent">
+            <iframe class="youtube-player" type="text/html" width="590" height="357" src="http://www.youtube.com/embed/{{ homepage.videoid_youtube }}" frameborder="0"></iframe>
+    {#        <a href="http://www.adobe.com/go/getflashplayer"><img src="{{ STATIC_URL }}" alt="{% trans "Get Flash to view makerstudios.com" %}" width="590" height="357"/></a>#}
+        </div>
+    </div>
+
+    <div id="join_cta">
+        <a href="/join-our-network/"><img src="{{ MEDIA_URL }}{{ homepage.image_join_cta }}" alt="Join Maker Studios"/></a>
+    </div>
+
+    <div id="home_stats">
+        <img src="{{ MEDIA_URL }}{{ homepage.image_stats }}" alt="33 Million Subscribers"/>
+    </div>
+
+    <div id="tweetwrap">
+        <div id="twittericon"><img src="{{ STATIC_URL }}images/twitterbird.png" alt="{% trans "Tweets" %}" /></div>
+        <div id="twittertweets">
+        {% if "mezzanine.twitter"|is_installed %}
+        {% include "twitter/tweets.html" %}
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_body %}
+{% comment %}<script type="text/javascript" src="{{ STATIC_URL }}js/swfobject.js"></script>
+<script type="text/javascript">
+function loadPlayer(){
+    var params = { allowScriptAccess:"always", allowfullscreen:true};
+    var atts = { id: "myContent" };
+    swfobject.embedSWF("http://www.youtube.com/v/{{ homepage.videoid_youtube }}?enablejsapi=1&playerapiid=ytplayer&autoplay=0", "myContent", "590", "357", "9.0.0", null, null, params, atts);
+}
+</script>{% endcomment %}
+{% endblock %}

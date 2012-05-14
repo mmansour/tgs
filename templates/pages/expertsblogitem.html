@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags %}
+
+{% block meta_title %}{{ page.title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% endblock %}
+{% block extra_head %}
+<meta property="og:title" content="{{ page.expertsblogitem.title }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://{{ request.META.HTTP_HOST }}/{{ page.expertsblogitem.slug }}/" />
+<meta property="og:image" content="{{ MEDIA_URL }}{% thumbnail page.expertsblogitem.headerimg 480 290 %}" />
+<meta property="og:site_name" content="Maker Studios" />
+<meta property="fb:admins" content="100001533349176" />
+{% endblock %}
+
+{% block main %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=390317867656082";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div id="grid-middle-blog">
+    <div id="blog-wrapper">
+            <div class="blog-date">
+                {{ page.expertsblogitem.publish_date|date:"M"|upper}}
+                <span class="date-day">{{ page.expertsblogitem.publish_date|date:"d"}}</span>
+                {{ page.expertsblogitem.publish_date|date:"Y"}}
+            </div>
+            <div id="blog-image">
+              <img src="{{ MEDIA_URL }}{% thumbnail page.expertsblogitem.headerimg 480 290 %}" alt="n.title" />
+            </div>
+
+            <h2>{% editable page.expertsblogitem.title %}{{ page.expertsblogitem.title|safe }}{% endeditable %}</h2>
+            <div id="blog-author">{{ page.expertsblogitem.author }}</div>
+            {% editable page.expertsblogitem.blog_text %}{{ page.expertsblogitem.blog_text|safe }}{% endeditable %}
+            <div id="blog-twitter-shares">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-via="makerstudios">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+            <div id="blog-facebook-like">
+                <div class="fb-like" data-href="http://www.makerstudios.com" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+            </div>
+            <div id="blog-google-plus">
+                <!-- Place this tag where you want the +1 button to render -->
+                <g:plusone size="small"></g:plusone>
+            </div>
+            <div id="blog-back">
+                <a href="/experts-blog/"><< BACK TO ALL POSTS</a>
+            </div>
+
+    </div>
+    <div id="blog-featured-posts">
+        <h2>Featured Posts</h2>
+        {% for post in featured_posts %}
+            <a href="/{{ post.slug }}/"><img src="{{ MEDIA_URL }}{% thumbnail post.headerimg 95 88 %}" alt="n.title"/></a>
+            <div class="blog-featured-title">{{ post.title }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_body %}
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script>
+{% endblock %}

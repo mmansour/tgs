@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags %}
+
+{% block meta_title %}{{ page.contact.title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.contact.description }}
+{% endmetablock %}{% endblock %}
+
+{% block extra_head %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    function getParameterByName(name) {
+        var match = RegExp('[?&]' + name + '=([^&]*)')
+                        .exec(window.location.search);
+        return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+    }
+
+    $(document).ready(function(){
+        
+        $('a#submit-contact').click(function(e){
+            e.preventDefault();
+            $('form#contact').submit();
+        });
+
+        $('input[name=first_name]').focus(function(){
+            $(this).val('');
+        });
+
+        $('input[name=last_name]').focus(function(){
+            $(this).val('');
+        });
+
+        $('input[name=email]').focus(function(){
+            $(this).val('');
+        });
+
+        $('textarea[name=message]').focus(function(){
+            $(this).val('');
+        });
+        $('.thankyou').hide();
+        if (getParameterByName("submitted"))
+        {
+            $('.thankyou').show();
+            $('#contact-form').hide();
+            $('#contact-message').hide();
+            $('#contact-social').css({'margin-top':'17px'});
+        }
+    });
+    </script>
+{% endblock %}
+
+{% block title %}
+{% editable page.contact.title %}{{ page.contact.title }}{% endeditable %}
+{% endblock %}
+
+{% block main %}
+<div id="grid-middle-contact">
+    <div id="contact-wrapper">
+        <div id="contact-copy">
+
+            <div id="contact-copy-header"><img src="{{ MEDIA_URL }}{{ page.contact.headerimg }}" alt="Contact Maker Studios"/></div>
+            <div id="contact-message">
+                {% editable page.contact.contact_page_message %}{{ page.contact.contact_page_message|safe}}{% endeditable %}
+            </div>
+            <div class="thankyou">
+                {% editable page.contact.thankyou_message %}{{ page.contact.thankyou_message|safe}}{% endeditable %}
+            </div>
+            <div id="contact-form">
+                <form action="" method="post" id="contact">
+                    {% csrf_token %}
+                    <table border="1">
+                    <tr>
+                        <td>{{ form.first_name.errors }}{{ form.first_name }}</td>
+                        <td>{{ form.last_name.errors }}{{ form.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.email.errors }}{{ form.email }}</td>
+                        <td>{{ form.subject.errors }}{{ form.subject }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{ form.message.errors }}{{ form.message }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right">
+                            <a href="#" id="submit-contact"><img src="{{ STATIC_URL }}images/submit-join.png" alt="Submit"/></a></td>
+                    </tr>
+                   </table>
+                </form>
+            </div>
+            <div id="contact-social">
+                <ul>
+                    <li><a href="http://www.facebook.com/makerstudios" target="_blank">facebook</a></li>
+                    <li><a href="https://twitter.com/makerstudios" target="_blank">twitter</a></li>
+                    <li><a href="https://plus.google.com/s/maker%20studios" target="_blank">google plus</a></li>
+                    <li><a href="http://www.youtube.com/watch?v=GHkGL_BFIEY" target="_blank">youtube</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

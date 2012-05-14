@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags i18n%}
+
+{% block meta_title %}{{ page.about.title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.about.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% editable page.about.title %}{{ page.about.title }}{% endeditable %}
+{% endblock %}
+
+{% block main %}
+{% if page.about.slug == 'home'  %}
+<div id="grid-middle-home">
+    <div id="home-wrapper">
+        <div id="home-copy">
+{#        <img src="{{ MEDIA_URL }}{{ page.about.headerimg }}" alt="Who we are"/>#}
+        {% editable page.about.abouttext %}{{ page.about.abouttext|safe}}{% endeditable %}
+        <a href="/join-our-network/"><img src="{{ STATIC_URL }}images/rpmjoinnowbutton.png" alt="{% trans "Join the RPM network" %}"/></a>
+        </div>
+    </div>
+</div>
+{% else %}
+    <div id="grid-middle-about">
+    <div id="about-wrapper">
+        <div id="about-copy">
+        {% editable page.about.abouttext %}{{ page.about.abouttext|safe}}{% endeditable %}
+        <a href="/join-our-network/"><img src="{{ STATIC_URL }}images/rpmjoinnowbutton.png" alt="{% trans "Join the RPM network" %}"/></a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

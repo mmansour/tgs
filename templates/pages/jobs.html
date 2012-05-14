@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags %}
+
+{% block meta_title %}{{ page.title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% endblock %}
+
+{% block main %}
+
+<div id="grid-middle-jobs">
+<div id="jobs-wrapper">
+    <div id="jobs-copy">
+    <div id="jobs-copy-header">
+    <img src="{{ STATIC_URL }}images/jobs-header.png" alt="Jobs at Maker Studios"/>
+    </div>
+    <h2>{% editable page.description %}{{ page.description|safe }}{% endeditable %}</h2>
+    <hr />
+    <div class="subhead">
+        <h3>CURRENT POSITIONS</h3>
+    </div>
+    <div id="jobs-list">
+        <ul>
+        {% for j in joblist %}
+            {% if j.slug != 'faq' %}
+                <li><a href="/{{ j.slug }}/">{{ j.title|upper }}</a></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

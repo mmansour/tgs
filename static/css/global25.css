@@ -42,13 +42,13 @@
 #grid-left {float:left;width:125px; background: #FFF; margin-right: -125px;
     position: relative;}
 #navi{width:125px; text-align: left;
-    text-transform: lowercase; margin: 0 0 0 -17px;}
+    text-transform: none; margin: -17px 0 0 -17px;}
 #navi a{text-decoration:none; font-size: 10pt; font-family: 'Helvetica', serif;
-    letter-spacing: 1px; color:#666; font-weight:normal; margin: 0 0 0 17px; display: block;}
+    letter-spacing: 1px; color:#999; font-weight:normal; margin: 0 0 0 17px; display: block;}
 #navi .active a{margin-right: 17px; display: block;}
-#navi li.active{background:transparent url('/static/images/rpmleftnavarrow.png') no-repeat left center;
+#navi li.active{background:transparent url('/static/images/tgsarrow.png') no-repeat left center;
     margin-right:0;}
-#logo img{margin: 17px 0 0 0; width:125px; height:136px;}
+#logo img{margin: 47px 0 0 0; width:125px; height:136px;}
 #grid-left hr{width:75%; color:#666; background-color: #666;
 height: 1px;margin: 57px auto 17px auto; border: 0;}
 #grid-left li{display:block; margin:13px 17px; line-height:100%;}
@@ -79,7 +79,7 @@ END HOME*/
 #grid-middle-home{float:left;width:867px;padding-bottom: 27px;
     background:transparent; border-left:125px solid #FFF;}
 
-#home-wrapper{background:transparent url('/static/images/rpmhomebgnew.png') no-repeat center top;
+#home-wrapper{background:transparent url('/static/images/tgshome.png') no-repeat center top;
     width:836px; height:627px;margin: 17px 0 0 17px;}
 #home-copy{width:350px; height:380px; float:right; color:#FFF;
     margin: 191px 0 0 33px;}
@@ -94,9 +94,9 @@ END HOME*/
 #grid-middle-about{float:left;width:867px;padding-bottom: 27px;
     background:transparent; border-left:125px solid #FFF;}
 
-#about-wrapper{background:transparent url('/static/images/about.png') no-repeat center top;
+#about-wrapper{background:transparent url('/static/images/tgsabout.png') no-repeat center top;
     width:836px; height:627px;margin: 17px 0 0 17px;}
-#about-copy{width:561px; height:380px; float:right; color:#000;
+#about-copy{width:350px; height:380px; float:right; color:#fff;
     margin: 71px 0 0 33px;}
 #about-copy img{margin: 21px 0 0 37px;}
 #about-copy p{font-family:helvetica, serif; font-size:11pt; margin: 13px 37px 0 37px;
@@ -114,14 +114,14 @@ END HOME*/
 #grid-middle-join{float:left;width:867px;padding-bottom: 27px;
     background:transparent; border-left:125px solid #fff;}
 
-#join-wrapper{background:transparent url('/static/images/rpmjoinbgimage.png') no-repeat center top;
+#join-wrapper{background:transparent url('/static/images/tgsjoin.png') no-repeat center top;
     width:836px; height:627px;margin: 17px 0 0 17px;}
-#join-copy{width:440px; height:510px; float:right; color:#000;
+#join-copy{width:440px; height:510px; float:right; color:#fff;
     margin: 119px 13px 0 0;}
 #join-copy-header img{}
 #join-copy p{font-family:helvetica, serif; font-size:.8em; margin: 0 0 0 37px;}
 #join-copy h2{font-family:helvetica, serif;font-size:.8em;
-    margin: 9px 0 0 37px; color:#000;line-height: 150%;}
+    margin: 9px 0 0 37px; color:#fff;line-height: 150%;}
 #join-copy td{border: 0; padding:3px 9px 3px 0;}
 #join-form {margin: 17px 37px 0 37px; background:transparent;}
 #join-form input{width:185px; background: #262626; color:#ffffff;
@@ -332,11 +332,11 @@ li.next a{font-family:Helvetica, serif;font-size:.7em; margin: 0 0 0 97px;}
 /*CONTACT*/
 #grid-middle-contact{float:left;width:867px;padding-bottom: 27px;
     background:transparent; border-left:125px solid #fff;}
-#contact-wrapper{background:transparent url('/static/images/contact-bg.jpg') no-repeat center top;
+#contact-wrapper{background:transparent url('/static/images/tgscontact.png') no-repeat center top;
     width:836px; height:627px;margin: 17px 0 0 17px;}
 #contact-copy{width:440px; height:510px; float:right; color:#eff1e6;}
-#contact-copy-header img{margin: 87px 0 0 33px;}
-#contact-copy p{font-family:helvetica, serif; font-size:.8em; margin: 17px 37px 0 37px;}
+#contact-copy-header img{margin: 187px 0 0 33px;}
+#contact-copy p{font-family:helvetica, serif; font-size:.8em; margin: 197px 37px 0 37px;}
 #contact-copy h2{font-family:helvetica, serif; font-weight:bold; font-size:.8em;
     margin: 17px 0 17px 37px; line-height: 17px;}
 #contact-form {margin: 17px 33px 0 33px; background:transparent;}

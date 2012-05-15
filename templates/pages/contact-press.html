@@ -68,7 +68,7 @@
     <div id="contact-wrapper">
         <div id="contact-copy">
 
-            <div id="contact-copy-header"><img src="{{ MEDIA_URL }}{{ page.contact.headerimg }}" alt="Contact Maker Studios"/></div>
+{#            <div id="contact-copy-header"><img src="{{ MEDIA_URL }}{{ page.contact.headerimg }}" alt="Contact Maker Studios"/></div>#}
             <div id="contact-message">
                 {% editable page.contact.contact_page_message %}{{ page.contact.contact_page_message|safe}}{% endeditable %}
             </div>
@@ -92,19 +92,19 @@
                     </tr>
                     <tr>
                         <td colspan="2" align="right">
-                            <a href="#" id="submit-contact"><img src="{{ STATIC_URL }}images/submit-join.png" alt="Submit"/></a></td>
+                            <a href="#" id="submit-contact"><img src="{{ STATIC_URL }}images/tgssubmit.png" alt="Submit"/></a></td>
                     </tr>
                    </table>
                 </form>
             </div>
-            <div id="contact-social">
+            {% comment %}<div id="contact-social">
                 <ul>
                     <li><a href="http://www.facebook.com/makerstudios" target="_blank">facebook</a></li>
                     <li><a href="https://twitter.com/makerstudios" target="_blank">twitter</a></li>
                     <li><a href="https://plus.google.com/s/maker%20studios" target="_blank">google plus</a></li>
                     <li><a href="http://www.youtube.com/watch?v=GHkGL_BFIEY" target="_blank">youtube</a></li>
                 </ul>
-            </div>
+            </div>{% endcomment %}
         </div>
     </div>
 </div>

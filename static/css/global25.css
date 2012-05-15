@@ -82,7 +82,7 @@ END HOME*/
 #home-wrapper{background:transparent url('/static/images/tgshome.png') no-repeat center top;
     width:836px; height:627px;margin: 17px 0 0 17px;}
 #home-copy{width:350px; height:380px; float:right; color:#FFF;
-    margin: 191px 0 0 33px; line-height:17px;}
+    margin: 191px 0 0 33px; line-height:21px;}
 #home-copy img{margin: 21px 0 0 37px;}
 #home-copy p{font-family:helvetica, serif; font-size:11pt; margin: 13px 37px 0 37px;
     padding: 0; line-height: 17px;}

@@ -93,11 +93,10 @@ END HOME*/
 /*ABOUT NEW*/
 #grid-middle-about{float:left;width:867px;padding-bottom: 27px;
     background:transparent; border-left:125px solid #FFF;}
-
 #about-wrapper{background:transparent url('/static/images/tgsabout.png') no-repeat center top;
     width:836px; height:627px;margin: 17px 0 0 17px;}
 #about-copy{width:350px; height:380px; float:right; color:#fff;
-    margin: 71px 0 0 33px;}
+    margin: 191px 0 0 33px;}
 #about-copy img{margin: 21px 0 0 37px; line-height:17px;}
 #about-copy p{font-family:helvetica, serif; font-size:11pt; margin: 13px 37px 0 37px;
     padding: 0; line-height: 17px;}

@@ -138,12 +138,19 @@
         </div>
         <div id="join-form">
             <form action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" id="join">
-
                 <input type=hidden name="oid" value="00DU0000000JLmY">
+                <input type=hidden name="retURL" value="http://www.thegamestation.tv/join-our-network/?submitted=true">
+                <input type=hidden name="00NU00000030U4K" value="Maker">
+                <input type="hidden" id="00NU00000030Vaq" name="00NU00000030Vaq" value="tgs.makerstudios.com"/>
+                <input type="hidden" id="Campaign_ID" name="Campaign_ID" value="701U00000009kuK"/>
+                <input type="hidden" name="member_status" value="responded" />
+
+                <!--Old-->
+               {% comment %} <input type=hidden name="oid" value="00DU0000000JLmY">
                 <input type=hidden name="retURL" value="http://rpmtalentnetwork.com/join-our-network/?submitted=true">
                 <input type=hidden name="00NU00000030U4K" value="RPM">
                 <input type="hidden" id="00NU00000030Vaq" name="00NU00000030Vaq" value="rpmtalentnetwork.com"/>
-                <input type="hidden" id="Campaign_ID" name="Campaign_ID" value="Campaign_ID"/>
+                <input type="hidden" id="Campaign_ID" name="Campaign_ID" value="Campaign_ID"/>{% endcomment %}
 
                 <!--  ----------------------------------------------------------------------  -->
                 <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
@@ -171,13 +178,15 @@
                 </tr>
                 <tr>
                     <td><input id="00NU00000030Uth" maxlength="40" name="00NU00000030Uth" size="20" type="text" value="Skype"/></td>
-                    <td><select id="00NU0000002SqwG" name="00NU0000002SqwG" title="Genre"><option value="Genre">Genre</option><option value="Entertainment">Entertainment</option>
+                    <td><select id="00NU0000002SqwG" name="00NU0000002SqwG" title="Genre">
+                        {% comment %}<option value="Genre">Genre</option>
+                        <option value="Entertainment">Entertainment</option>{% endcomment %}
                         <option value="Gaming">Gaming</option>
-                        <option value="Music">Music</option>
+                        {% comment %}<option value="Music">Music</option>
                         <option value="Spanish">Spanish</option>
                         <option value="Moms/Women">Moms/Women</option>
                         <option value="Animation">Animation</option>
-                        <option value="Other">Other</option>
+                        <option value="Other">Other</option>{% endcomment %}
                         </select></td>
                 </tr>
                 <tr>

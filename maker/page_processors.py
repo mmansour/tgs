@@ -393,7 +393,7 @@ def contact_form(request, page):
                      subject,
                      message)
 
-            send_mail('Maker Contact/Press Inquiry', message, 'info@makerstudios.com',
+            send_mail('TGS Contact Inquiry', message, 'info@makerstudios.com',
                     ['info@makerstudios.com'], fail_silently=False)
             redirect = request.path + "?submitted=true"
             return HttpResponseRedirect(redirect)

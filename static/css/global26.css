@@ -118,8 +118,8 @@ END HOME*/
 #join-copy{width:440px; height:510px; float:right; color:#fff;
     margin: 119px 13px 0 0;}
 #join-copy-header img{}
-#join-copy p{font-family:helvetica, serif; font-size:.8em; margin: 0 0 0 37px;}
-#join-copy h2{font-family:helvetica, serif;font-size:.8em;
+#join-copy p{font-family:helvetica, serif; font-size:11pt; margin: 0 0 0 37px;}
+#join-copy h2{font-family:helvetica, serif;font-size:11pt;
     margin: 9px 0 0 37px; color:#fff;line-height: 150%;}
 #join-copy td{border: 0; padding:3px 9px 3px 0;}
 #join-form {margin: 17px 37px 0 37px; background:transparent;}
@@ -335,7 +335,7 @@ li.next a{font-family:Helvetica, serif;font-size:.7em; margin: 0 0 0 97px;}
     width:836px; height:627px;margin: 17px 0 0 17px;}
 #contact-copy{width:440px; height:510px; float:right; color:#eff1e6;}
 #contact-copy-header img{margin: 187px 0 0 33px;}
-#contact-copy p{font-family:helvetica, serif; font-size:.8em; margin: 197px 37px 0 37px;}
+#contact-copy p{font-family:helvetica, serif; font-size:11pt; margin: 197px 37px 0 37px;}
 #contact-copy h2{font-family:helvetica, serif; font-weight:bold; font-size:.8em;
     margin: 17px 0 17px 37px; line-height: 17px;}
 #contact-form {margin: 17px 33px 0 33px; background:transparent;}

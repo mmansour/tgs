@@ -53,6 +53,10 @@
             {
                 errmsg+="Views Per Month \n"; alert(errmsg); $('select[name=00NU0000002SqvO]').focus(); return false;
             }
+            if($('select[name=00NU0000002SqvO]').val()=='0-30K')
+            {
+                errmsg+="Views Per Month needs to be at least 30k. Try back when you're there! \n"; alert(errmsg); $('select[name=00NU0000002SqvO]').focus(); return false;
+            }
             if($('select[name=00NU0000002Squz]').val()=='YouTube-Partner?')
             {
                 errmsg+="Partnered? \n"; alert(errmsg); $('select[name=00NU0000002Squz]').focus(); return false;
@@ -198,7 +202,9 @@
                 </tr>
                 <tr>
                     <td><input  id="phone" maxlength="40" name="phone" size="20" type="text" value="Phone"/></td>
-                    <td><select  id="00NU0000002SqvO" name="00NU0000002SqvO" title="Views Per Month"><option value="Views-Per-Month">Views Per Month</option><option value="0-100K">0-100K</option>
+                    <td><select  id="00NU0000002SqvO" name="00NU0000002SqvO" title="Views Per Month"><option value="Views-Per-Month">Views Per Month</option>
+                        <option value="0-30K">0-30K</option>
+                        <option value="30K-100K">30K-100K</option>
                         <option value="100K-500K">100K-500K</option>
                         <option value="500K-3M">500K-3M</option>
                         <option value="3M+">3M+</option>

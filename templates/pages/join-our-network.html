@@ -457,7 +457,7 @@
     </div>
 </div>
 
-{% block extra_body %}
+{% block extra_body %}{% comment %}
 {% if request.REQUEST.submitted %}
 <!-- Google Code for RPM Signed Up Conversion Page -->
 <script type="text/javascript">
@@ -477,7 +477,7 @@ var google_conversion_value = 0;
 <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1001326589/?label=dGshCNv39AIQ_Y-83QM&amp;guid=ON&amp;script=0"/>
 </div>
 </noscript>
-{% endif %}
+{% endif %}{% endcomment %}
 {% endblock %}
     
 {% endblock %}

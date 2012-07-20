@@ -1,7 +1,7 @@
 from django import forms
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from mezzanine.pages.page_processors import processor_for
-from maker.models import Join, Contact, Job, NewsItem, ExpertsBlogItem
+from maker.models import Join, Contact
 from django.utils.translation import ugettext_lazy as _
 from django.core.mail import send_mail
 from mezzanine.utils.views import paginate
@@ -400,39 +400,39 @@ def contact_form(request, page):
     return {"form": form}
 
 
-@processor_for("jobs")
-def get_jobs(request, page):
-    joblist = Job.objects.filter(status=2)
-    return {'joblist':joblist}
+#@processor_for("jobs")
+#def get_jobs(request, page):
+#    joblist = Job.objects.filter(status=2)
+#    return {'joblist':joblist}
 
-@processor_for("news")
-def get_news(request, page):
-    newslist = NewsItem.objects.filter(status=2).order_by('-publish_date')
-    newslist = paginate(newslist,
-                        request.GET.get("page", 1),
-                        7, 7)
-    print request.GET.get("page")
-    if request.GET.get("page") == '1':
-        return HttpResponsePermanentRedirect('/news/')
-    else:
-        return {'newslist':newslist}
+#@processor_for("news")
+#def get_news(request, page):
+#    newslist = NewsItem.objects.filter(status=2).order_by('-publish_date')
+#    newslist = paginate(newslist,
+#                        request.GET.get("page", 1),
+#                        7, 7)
+#    print request.GET.get("page")
+#    if request.GET.get("page") == '1':
+#        return HttpResponsePermanentRedirect('/news/')
+#    else:
+#        return {'newslist':newslist}
 
-@processor_for("experts-blog")
-def get_expert_blog_posts(request, page):
-    bloglist = ExpertsBlogItem.objects.filter(status=2).order_by('-publish_date')
-    bloglist = paginate(bloglist,
-                        request.GET.get("page", 1),
-                        7, 7)
-    featured_posts = ExpertsBlogItem.objects.filter(status=2)\
-        .filter(is_featured=True).order_by('-publish_date')
-
-    if request.GET.get("page") == '1':
-        return HttpResponsePermanentRedirect('/experts-blog/')
-    else:
-        return {'bloglist':bloglist, 'featured_posts':featured_posts}
-
-@processor_for(ExpertsBlogItem)
-def get_featured_posts(request, page):
-    featured_posts = ExpertsBlogItem.objects.filter(status=2)\
-        .filter(is_featured=True).order_by('-publish_date')
-    return {'featured_posts':featured_posts}
+#@processor_for("experts-blog")
+#def get_expert_blog_posts(request, page):
+#    bloglist = ExpertsBlogItem.objects.filter(status=2).order_by('-publish_date')
+#    bloglist = paginate(bloglist,
+#                        request.GET.get("page", 1),
+#                        7, 7)
+#    featured_posts = ExpertsBlogItem.objects.filter(status=2)\
+#        .filter(is_featured=True).order_by('-publish_date')
+#
+#    if request.GET.get("page") == '1':
+#        return HttpResponsePermanentRedirect('/experts-blog/')
+#    else:
+#        return {'bloglist':bloglist, 'featured_posts':featured_posts}
+#
+#@processor_for(ExpertsBlogItem)
+#def get_featured_posts(request, page):
+#    featured_posts = ExpertsBlogItem.objects.filter(status=2)\
+#        .filter(is_featured=True).order_by('-publish_date')
+#    return {'featured_posts':featured_posts}

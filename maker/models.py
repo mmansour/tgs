@@ -36,32 +36,32 @@ class Contact(Page):
     def __unicode__(self):
         return self.title
 
-class Job(Page):
-    job_post = RichTextField(blank=True, null=True, verbose_name="Job Opportunity")
-
-    def __unicode__(self):
-        return self.title
-
-class NewsItem(Page):
-    headerimg = models.ImageField(upload_to='uploads', default='uploads/news-default_1.png', null=True, blank=True)
-    author = models.TextField(blank=True, null=True, verbose_name="Author")
-    news_text = RichTextField(blank=True, null=True, verbose_name="News Copy")
-    news_url = models.URLField(blank=True, null=True, verbose_name="News URL")
-    news_url_target = models.CharField(blank=True, null=True,
-                                       max_length=10,
-                                       verbose_name="To Open New Window use '_blank'. Same Window '_self'", default="_blank")
-
-    def __unicode__(self):
-        return self.title
-
-class ExpertsBlogItem(Page):
-    is_featured = models.BooleanField(default=False)
-    headerimg = models.ImageField(upload_to='uploads', default='uploads/blog-header.jpg', null=True, blank=True)
-    author = models.TextField(blank=True, null=True, verbose_name="Author")
-    blog_text = RichTextField(blank=True, null=True, verbose_name="Blog Copy")
-
-    def __unicode__(self):
-        return self.title
+#class Job(Page):
+#    job_post = RichTextField(blank=True, null=True, verbose_name="Job Opportunity")
+#
+#    def __unicode__(self):
+#        return self.title
+#
+#class NewsItem(Page):
+#    headerimg = models.ImageField(upload_to='uploads', default='uploads/news-default_1.png', null=True, blank=True)
+#    author = models.TextField(blank=True, null=True, verbose_name="Author")
+#    news_text = RichTextField(blank=True, null=True, verbose_name="News Copy")
+#    news_url = models.URLField(blank=True, null=True, verbose_name="News URL")
+#    news_url_target = models.CharField(blank=True, null=True,
+#                                       max_length=10,
+#                                       verbose_name="To Open New Window use '_blank'. Same Window '_self'", default="_blank")
+#
+#    def __unicode__(self):
+#        return self.title
+#
+#class ExpertsBlogItem(Page):
+#    is_featured = models.BooleanField(default=False)
+#    headerimg = models.ImageField(upload_to='uploads', default='uploads/blog-header.jpg', null=True, blank=True)
+#    author = models.TextField(blank=True, null=True, verbose_name="Author")
+#    blog_text = RichTextField(blank=True, null=True, verbose_name="Blog Copy")
+#
+#    def __unicode__(self):
+#        return self.title
     
 
 

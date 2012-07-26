@@ -41,9 +41,17 @@
             {
                 errmsg += "Email \n "; alert(errmsg); $('input[name=email]').focus(); return false;
             }
-            if($('select[name=00NU00000030Utc]').val()=='Over-18?')
+            /*if($('select[name=00NU00000030Utc]').val()=='Over-18?')
             {
                 errmsg+="Age \n "; alert(errmsg); $('select[name=00NU00000030Utc]').focus(); return false;
+            }*/
+            if($('input[name=00NU00000032Ibp]').val()=='' || $('input[name=00NU00000032Ibp]').val()=='Date of Birth (mm/dd/yyyy)')
+            {
+                errmsg += "Date of Birth \n "; alert(errmsg); $('input[name=00NU00000032Ibp]').focus(); return false;
+            }
+            if(!$('input[name=00NU00000032Ibp]').val().match(/\d{2}\/\d{2}\/\d{4}/))
+            {
+                errmsg += "Date of birth format needs to be: mm/dd/yyyy \n "; alert(errmsg); $('input[name=00NU00000032Ibp]').focus(); return false;
             }
             if($('input[name=00NU00000030VRK]').val()=='' || $('input[name=00NU00000030VRK]').val()=='Channel URL(s)')
             {
@@ -171,11 +179,12 @@
                 </tr>
                 <tr>
                     <td><input  id="email" maxlength="80" name="email" size="20" type="text" value="Email"/></td>
-                    <td><select  id="00NU00000030Utc" name="00NU00000030Utc" title="Over 18?">
+                    {% comment %}<td><select  id="00NU00000030Utc" name="00NU00000030Utc" title="Over 18?">
                         <option value="Over-18?">Over 18?</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
-                        </select></td>
+                        </select></td>{% endcomment %}
+                    <td><input id="00NU00000032Ibp" maxlength="40" name="00NU00000032Ibp" size="20" type="text" value="Date of Birth (mm/dd/yyyy)"/></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input  id="00NU00000030VRK" maxlength="255" name="00NU00000030VRK" type="text" class="longinput" value="Channel URL(s)"/></td>

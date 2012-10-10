@@ -32,21 +32,46 @@
             $('form#contact').submit();
         });
 
-        $('input[name=first_name]').focus(function(){
-            $(this).val('');
+        /*$('input[name=first_name]').blur(function(){
+            $(this).css({'color':'#cccccc', 'background':'#222222'});
+            $(this).select();
         });
 
-        $('input[name=last_name]').focus(function(){
-            $(this).val('');
+        $('input[name=last_name]').blur(function(){
+            $(this).css({'color':'#cccccc', 'background':'#222222'});
+            $(this).select();
         });
 
-        $('input[name=email]').focus(function(){
-            $(this).val('');
+        $('input[name=email]').blur(function(){
+            $(this).css({'color':'#cccccc', 'background':'#222222'});
+            $(this).select();
         });
 
-        $('textarea[name=message]').focus(function(){
-            $(this).val('');
+        $('textarea[name=message]').blur(function(){
+            $(this).css({'color':'#cccccc', 'background':'#222222'});
+            $(this).select();
+        });*/
+
+        $('input[name=first_name]').click(function(){
+//            $(this).css({'color':'#222222', 'background':'#cccccc'});
+            $(this).select();
         });
+
+        $('input[name=last_name]').click(function(){
+//            $(this).css({'color':'#222222', 'background':'#cccccc'});
+            $(this).select();
+        });
+
+        $('input[name=email]').click(function(){
+//            $(this).css({'color':'#222222', 'background':'#cccccc'});
+            $(this).select();
+        });
+
+        $('textarea[name=message]').click(function(){
+//            $(this).css({'color':'#222222', 'background':'#cccccc'});
+            $(this).select();
+        });
+        
         $('.thankyou').hide();
         if (getParameterByName("submitted"))
         {
